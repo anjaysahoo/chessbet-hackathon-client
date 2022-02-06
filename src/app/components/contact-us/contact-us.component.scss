@@ -1,0 +1,75 @@
+// $size: 50%;
+// .semi{
+//   border-top-left-radius: $size * 2;
+//   border-top-right-radius: $size * 2;
+//   height: 200px;
+//   width: 100%;
+//   background: #9e978e;
+//   display: inline-block;
+//   margin: 0 1em 1em 0;
+// }
+
+.contactUs {
+  border-top-left-radius: 500rem;
+  border-top-right-radius: 500rem;
+  background-color: #171512;
+  box-shadow: 0px 8px 8px -6px rgba(0, 0, 0, .5);
+  height: 52vh;
+
+}
+
+.footer {
+  height: 30px;
+  background-color: f8f4f4;
+}
+
+p {
+  text-align: center;
+}
+
+.brand {
+
+  // position: absolute;
+  width: 17%;
+  margin-left: 42%;
+}
+
+h3 {
+  text-align: center;
+  padding: 1.7rem;
+}
+
+.logo {
+  width: 3.7%;
+  height: 3.7%;
+  padding: 10px;
+}
+
+.twitter-handle {
+  // display: flex;
+}
+
+.twitter-handle-img {
+
+  width: 12vw;
+  height: 20vh;
+  // text-decoration: white;
+  // padding: 0 15px 0 15px;
+  // padding: 10px 20px 5px 20px;
+  // display: inline-block;
+}
+
+.twitter-handle-anchor {
+  text-decoration: white;
+}
+
+
+figure {
+  display: inline-block;
+
+}
+
+.caption {
+  color: white;
+  text-align: center;
+}

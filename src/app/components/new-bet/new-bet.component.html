@@ -1,0 +1,147 @@
+<form
+  autocomplete="off"
+  (ngSubmit)="placeBet()"
+  *ngIf="!betSuccess && !betFailure && !isGameOver && !isGameBullet && !isGameInvalid"
+  class="row row-cols-lg-auto g-3 align-items-center gameInputId"
+  #f="ngForm"
+>
+  <!-- <div *ngIf="betSuccess==false" class="row row-cols-lg-auto g-3 align-items-center gameInputId"> -->
+  <div class="col-12">
+    <input
+      type="text"
+      name="gameId"
+      ngModel
+      class="form-control"
+      id="inlineFormInputGroupUsername"
+      placeholder="Game ID OR Game URL"
+      #gameId="ngModel"
+      required
+      pattern="(https:\/\/)?(lichess.org\/)?(\w{8})(\/black)?"
+    />
+    <mat-error *ngIf="!gameId.valid && gameId.touched"
+               style="color: red;"
+    >Please enter valid Game URL or Game ID
+    </mat-error
+    >
+  </div>
+
+  <div class="col-12">
+    <!-- <label for="inlineFormSelectPref"
+      >Select The Side(Black or White)</label
+    > -->
+    <select
+      class="form-control"
+      id="inlineFormSelectPref"
+      name="side"
+      [(ngModel)]="defaultSideValue"
+      #side="ngModel"
+      required
+    >
+      <option [ngValue]="null" disabled selected>Select The Side(Black or White)</option>
+      <option value="1">Black</option>
+      <option value="2">White</option>
+    </select>
+    <mat-error *ngIf="!side.valid && side.touched"
+               style="color: red;"
+    >Please choose a side
+    </mat-error
+    >
+  </div>
+  <div class="col-12">
+    <input
+      type="number"
+      class="form-control"
+      id="inlineFormInputGroupUsername"
+      placeholder="Amount In MATIC"
+      ngModel
+      name="amount"
+      #amount="ngModel"
+      required
+      pattern="^(?!(0))\d{1,16}$"
+    />
+    <mat-error *ngIf="!amount.valid && amount.touched"
+               style="color: red;"
+    >Please enter a valid amount
+    </mat-error
+    >
+  </div>
+  <div *ngIf="!disablePlaceBet && isMetamaskInstalled" class="col-12">
+    <button type="submit" class="btn btn-dark" [disabled]="!f.valid || disablePlaceBet">Place My New Bet💰</button>
+  </div>
+  <div *ngIf="disablePlaceBet && isMetamaskInstalled" class="col-12">
+    <button class="btn btn-dark" type="button" disabled>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+      Placing Bet💫
+    </button>
+  </div>
+  <div *ngIf="!isMetamaskInstalled" class="col-12">
+    <button class="btn btn-dark" type="button" disabled>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+      Install Metamask
+    </button>
+  </div>
+</form>
+<!-- </div> -->
+
+<div *ngIf="betSuccess == true" class="betSuccess">
+  <h3 class="font-weight-bold" style="font-style: italic">
+    Bet Placed Successfully!!!
+  </h3>
+  <h3>🙌😎🎉🎉</h3>
+  <br/>
+  <button type="button" class="btn btn-dark" (click)="placeAnotherBet()">
+    Place Another Bet🤑
+  </button>
+</div>
+
+
+<div *ngIf="betFailure == true" class="betfailed">
+  <h3 class="font-weight-bold" style="font-style: italic">
+    Bet Failed!!!
+  </h3>
+  <p>Transaction Cancelled <br>OR <br> Transaction has been reverted by the EVM</p>
+  <h3>💔😌😭💔</h3>
+  <br/>
+  <button type="button" class="btn btn-dark" (click)="tryAgain()">
+    🥺Please Try Again🙏
+  </button>
+</div>
+
+<div *ngIf="isGameOver == true" class="missed">
+  <h3 class="font-weight-bold" style="font-style: italic">
+    OOPs You Missed !!!
+  </h3>
+  <p>Game is over <br> Please place a bet for live match</p>
+  <h3>💔😌😭💔</h3>
+  <br/>
+  <button type="button" class="btn btn-dark" (click)="tryAgain()">
+    🥺Please Try For Live Game🙏
+  </button>
+</div>
+
+
+<div *ngIf="isGameBullet == true" class="bullet">
+  <h3 class="font-weight-bold" style="font-style: italic">
+    Short Game Not Allowed !!!<span style="font-style: normal;">⌚</span>
+  </h3>
+  <p>Sorry Games having start duration less than <b>3 Minutes</b> not allowed <br> Please choose a different game</p>
+  <h3>💔😌😭💔</h3>
+  <br/>
+  <button type="button" class="btn btn-dark" (click)="tryAgain()">
+    🥺Please Try Again🙏
+  </button>
+</div>
+
+
+<div *ngIf="isGameInvalid == true" class="invalidGame">
+  <h3 class="font-weight-bold" style="font-style: italic">
+    Invalid Game ID !!!<span style="font-style: normal;">😑</span>
+  </h3>
+  <p>Sorry entered game id does not exist on Lichess <br> Please cross check game id and try again</p>
+  <h3>💔😌😭💔</h3>
+  <br/>
+  <button type="button" class="btn btn-dark" (click)="tryAgain()">
+    🥺Please Try Again🙏
+  </button>
+</div>
+

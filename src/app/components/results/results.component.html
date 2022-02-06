@@ -1,0 +1,111 @@
+<div class="result">
+  <div class="card text-dark mb-3 tile ">
+    <div class="card-header bg-dark text-light">
+      <h5 class="liveHead">Results🏆</h5>
+      <div class="input-group form-inline">
+        <!-- <form class="form-inline "> -->
+        <input class="form-control form-inline" [(ngModel)]="searchText" type="text" placeholder="Search"
+               aria-label="Search">
+        <!-- </form> -->
+        <!-- <button type="button" class="btn btn-warning searchButton" (click)="log()">
+          <i class="bi bi-search"></i>
+        </button> -->
+      </div>
+    </div>
+
+
+    <!-- <br> -->
+
+    <div class="card-body table-responsive scroll">
+      <table matSort (matSortChange)="sortData($event)" class="table table-hover table-sm">
+        <thead>
+        <tr>
+          <!-- <th mat-sort-header="slNo" scope="col">#</th> -->
+          <th mat-sort-header="gameId" matTooltip="Game ID for respective game" matTooltipPosition="above" scope="col">
+            Game ID
+          </th>
+          <th mat-sort-header="blackBettor" matTooltip="Total bettors on black side" matTooltipPosition="above"
+              scope="col" style="font-weight: normal;"> ♞ <b>Bettors</b></th>
+          <th mat-sort-header="blackAmount" matTooltip="Total MATIC on black side" matTooltipPosition="above"
+              scope="col" style="font-weight: normal;"> ♞ <b>Black Amount</b> 💰
+          </th>
+          <th mat-sort-header="whiteBettor" matTooltip="Total bettors on white side" matTooltipPosition="above"
+              scope="col" style="font-weight: normal;"> ♘ <b>Bettors</b></th>
+          <th mat-sort-header="whiteAmount" matTooltip="Total MATIC on white side" matTooltipPosition="above"
+              scope="col" style="font-weight: normal;"> ♘ <b>White Amount</b> 💰
+          </th>
+          <th mat-sort-header="totalAmount" matTooltip="Total MATIC from both side" matTooltipPosition="above"
+              scope="col" style="font-weight: normal;"><b>Total MATIC</b> 💰
+          </th>
+          <th mat-sort-header="totalAmount" matTooltip="Total bettors from both side" matTooltipPosition="above"
+              scope="col" style="font-weight: normal;"><b>Total Bettors</b> 💰
+          </th>
+          <!-- <th mat-sort-header="status" scope="col">Status</th> -->
+          <!-- <th mat-sort-header="duration" scope="col" >Duration(Min)⏳</th> -->
+          <th mat-sort-header="winner" matTooltip="Winning side" matTooltipPosition="above" scope="col"
+              style="font-weight: normal;"><b>Winner</b> 🥇
+          </th>
+          <th scope="col" class="thC">Action</th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let item of sortedData |  searchBar: searchText:list;let i=index">
+        <tr>
+          <!-- <th scope="row">{{i+1}}</th> -->
+          <td matTooltip="Click to preview match" matTooltipPosition="left"><a  class="link-info"
+                                                                               (click)="showGamePreview(item.matchID)">{{item.matchID}}</a>
+          </td>
+          <td>{{item.blackbets}}</td>
+          <td>{{item.blackAmount}}</td>
+          <td>{{item.whitebets}}</td>
+          <td>{{item.whiteAmount}}</td>
+          <td>{{item.totalAmount}}</td>
+          <td>{{item.totalBets}}</td>
+          <!-- <td >{{item.status}}</td> -->
+          <!-- <td >{{item.duration}}</td> -->
+          <td>{{item.winner}}</td>
+          <!-- <td class="tdC"><button type="button" class="btn btn-warning btn-sm" (click)="moreInfo()">More Info🤑</button></td> -->
+          <td class="tdC"><a [href]="'https://lichess.org/'+item.matchID" target="_blank" class="btn btn-warning btn-sm"
+                             role="button" aria-pressed="true">More Info🔗</a></td>
+
+        </tr>
+
+        </tbody>
+
+
+      </table>
+    </div>
+    <div class="card-foot">
+      <mat-paginator
+        class="card-foot"
+        (page)="onPageChange($event)"
+        [length]="numbersOfRow"
+        [pageSize]="10"
+        [pageSizeOptions]="[5,10,15]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+
+  </div>
+</div>
+
+
+<div class=" modal fade" id="resultGamePreview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Game Preview🧐</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <h5>For watching complete match analysis please click on OPEN 👇</h5>
+        <iframe [src]="trustedGamelink"
+                width=80% height=400rem frameborder=0></iframe>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger bet-btn-cancel" data-bs-dismiss="modal">Close❌</button>
+      </div>
+    </div>
+  </div>
+</div>
+

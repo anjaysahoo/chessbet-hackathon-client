@@ -1,0 +1,112 @@
+<div class="faq">
+  <div class="pageContent">
+    <div class="accordion list" id="accordionFlushExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                 Q1. Which tokens/cryptocurrencies can be used to place bets?
+          </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+             data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">Currently we only support <b>{{token}}</b>  tokens.
+            <br>
+            <b>{{contractAddress}}</b> . Please do not send any other tokens to our contract to place bets.
+
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+            Q2. Does it work for websites other than  &nbsp;<b> Lichess</b>?
+          </button>
+        </h2>
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+             data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">No, at the moment we only support <b><a href="https://lichess.org/" target="_blank">Lichess</a></b>.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+            Q3.  What if I place a bet on a match which is already under &nbsp; <b> “Live Bets”</b> ?
+          </button>
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+             data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">Our backend handles that scenario. Your bet will be placed on the <b>existing match</b> instead of creating a new game.
+
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingfour">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapsefour" aria-expanded="false" aria-controls="flush-collapseTwo">
+            Q4. Can I bet twice on the same game using one wallet?
+          </button>
+        </h2>
+        <div id="flush-collapsefour" class="accordion-collapse collapse" aria-labelledby="flush-headingfour"
+             data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body"> <b>No.</b>  We allow a single wallet address to bet only once in a particular game.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingfive">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapsefive" aria-expanded="false" aria-controls="flush-collapseTwo">
+            Q5.  Do I lose my tokens if my transaction fails while placing a bet?
+          </button>
+        </h2>
+        <div id="flush-collapsefive" class="accordion-collapse collapse" aria-labelledby="flush-headingfive"
+             data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body"><b> No.</b> {{token}} tokens you use to place a bet will not be deducted from your wallet. You may end up paying for gas though, but since our platform is deployed on Polygon, this fee is very miniscule.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingsix">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapsesix" aria-expanded="false" aria-controls="flush-collapseTwo">
+            Q6. What if a match ties? What if there is no clear winner in the match?
+          </button>
+        </h2>
+        <div id="flush-collapsesix" class="accordion-collapse collapse" aria-labelledby="flush-headingsix"
+             data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">The amount will be refunded back for all the bettors in that game. User can claim back their {{token}} using <b>“Claim Now”</b>  button in claim section.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item accordion-bg">
+        <h2 class="accordion-header" id="flush-headingseven">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseseven" aria-expanded="false" aria-controls="flush-collapseTwo">
+            Q7. What happens if no one places a bet on the opposite side?
+          </button>
+        </h2>
+        <div id="flush-collapseseven" class="accordion-collapse collapse" aria-labelledby="flush-headingseven"
+             data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">Your entire bet amount will be sent back to your wallet address and you can claim back your {{token}} using <b>“Claim Now”</b>  button in claim section.
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+
+  </div>
+
+  <div class="pageHeadingContent">
+    <p class="display-5">FAQs <span> <img src="./../assets/question.svg" class="size-img-question"></span></p>
+
+  </div>
+
+</div>
+
+

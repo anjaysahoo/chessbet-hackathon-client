@@ -1,0 +1,48 @@
+.backdrop {
+  // display: flex;
+  background-image: url("./../assets/chessBackground.svg");
+  //  background-attachment: fixed;
+  // background-position: center center;
+  // background-repeat: no-repeat;
+  background-size: cover;
+  height: 113vh;
+}
+
+.size-img {
+  height: 13rem;
+  margin-top: 3%;
+  margin-left: 8%;
+}
+
+.navbar {
+  width: 63%;
+  // float: right;
+  box-shadow: 0px 8px 8px -6px rgba(0, 0, 0, 0.5);
+  right: 0px;
+  position: fixed;
+  z-index: 1059;
+  top: 1.4rem;
+}
+
+.wallet-btn {
+  margin-left: auto;
+}
+
+// .new-live-bet-box{
+//   display: flex;
+// }
+
+// .howToBet{
+//     background-size: 100%  ;
+//     background-size: cover;
+//     height: 721px;
+//     background-color:#eca424;
+// }
+
+
+
+.notification{
+  height: 3vh;
+  background-color: black;
+
+}

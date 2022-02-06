@@ -1,0 +1,108 @@
+<div class="rules">
+  <div class="pageContent">
+    <mat-vertical-stepper class="stepper">
+      <mat-step>
+        <ng-template matStepLabel>
+                <span>
+                  <p class="step-size">Placing Bets</p>
+                </span>
+        </ng-template>
+        <ng-template matStepperIcon="edit">
+          <i class="bi bi-eye-fill"></i>
+        </ng-template>
+        <div class="step-content">
+         <ul>
+           <li>
+            Bets can range from a <b>minimum</b>  of <b>{{minimumAmountToBet}} {{token}}</b>  to any preferred maximum amount as long as the bettor has the funds in their wallet.
+           </li>
+           <li>
+            Players placing the bet on the game by entering the <b>“Game ID or Game URL”</b>  must provide a valid  “Game ID or Game URL” of an Active Game while placing bets. There have been multiple checks in place and the website ensures that players cannot bet on invalid / non-active game IDs, but if players try to spam the system, then they will lose all their funds associated with such activity.
+           <br>
+           <br>
+           For a <b>“Game ID or Game URL”</b> to be considered valid, it must satisfy the following criterion: -
+           <ol>
+             <li>
+              The game with the provided “Game ID or Game URL” must <b>exist on lichess.org</b> .
+             </li>
+             <li>
+              The game should <b>not have ended</b>  by the time the bet is being placed on it.
+             </li>
+             <li>
+              Game base time should be greater than <b>3 minutes</b> .
+              <br>
+              <b>E.g.:</b>  Game with time duration <b>3</b> + 1 or <b>5</b> + 0 etc. (here 3 & 5 being base time) are considered <b>valid</b> , but game with time duration <b>1</b> + 0 or <b>2</b> + 1 or <b>2</b> + 5 etc. are considerd <b>invalid</b> .
+             </li>
+           </ol>
+          </li>
+         </ul>
+        </div>
+
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>
+                <span>
+                  <p class="step-size">Game End</p>
+                </span>
+        </ng-template>
+        <div class="step-content-small">
+          <ul>
+            <li>
+              Once the game has ended on <b>lichess.org</b> , its betting period will also end on <b>chessBet.games</b> , and within a few seconds, it will be available for claiming rewards, based on the results of the game on lichess.org.
+            </li>
+          </ul>
+        </div>
+
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>
+                <span>
+                  <p class="step-size">Claim Reward</p>
+                </span>
+        </ng-template>
+        <div class="step-content-small">
+          <ul>
+            <li>
+              Bettors can manually claim their <b>rewards/funds</b>  anytime by clicking on the <b>“Claim Now”</b> button on the website. If the bettor has more than or equal to <b>10 unclaimed games</b>  then rewards will be claimed automatically when they place their next bet.
+            </li>
+          </ul>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>
+                  <span>
+                    <p class="step-size">Reward Calculation</p>
+                  </span>
+        </ng-template>
+        <div class="step-content">
+          Once the game has ended, the reward is calculated using the below formula.
+          <img src="./../assets/formula.svg" class="size-img">
+          <br>
+          <ul>
+            <li>
+              Only the {{token}} that was bet on either side within the <b>first 75%</b>  of the total duration of the gameplay time is considered for reward calculation.
+              <br>
+              <b>E.g.:</b>  If a game runs for 10 minutes, then only the {{token}} bet in the <b>first 7.5 minutes</b>  will be considered for reward calculation.
+            </li>
+            <li>
+              Any other {{token}} will be returned (can be claimed back) BUT will also be exempted from any possible rewards. Votes associated with such {{token}} fall under the category of discarded votes.
+            </li>
+            <li>
+              Also if the final Playtime of the game is less than <b>60 seconds</b>  then all funds are returned back to the respective bettors.
+            </li>
+            <li>
+              All winning amounts that bettor claim will be reduced by <b>{{feesAmount}} % </b> as part of fees, which will be used to support the chessbet.games ecosystem, maintain smooth operation, and conduct events in the future.
+            </li>
+          </ul>
+        </div>
+      </mat-step>
+
+    </mat-vertical-stepper>
+
+  </div>
+  <div class="pageHeadingContent">
+    <p class="display-5 heading">Rules</p>
+    <img src="./../assets/rule2.svg" class="size-img-horse">
+  </div>
+</div>

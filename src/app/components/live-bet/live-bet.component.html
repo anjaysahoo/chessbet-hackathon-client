@@ -1,0 +1,356 @@
+<div class="card text-dark mb-3 tile">
+  <div class="card-header bg-dark text-light">
+    <h5 class="liveHead">Live Bets🔥</h5>
+    <button class="btn btn-warning btn-sm refresh-btn" matTooltip="Refresh to load new bets"
+            matTooltipPosition="above" (click)="refreshLiveBet()" [disabled]="isFetching">Refresh
+    </button>
+    <div class="input-group form-inline">
+      <!-- <form class="form-inline "> -->
+      <input
+        class="form-control form-inline"
+        [(ngModel)]="searchText"
+        type="text"
+        placeholder="Search"
+        aria-label="Search"
+      />
+
+      <!-- </form> -->
+      <!-- <button type="button" class="btn btn-warning searchButton" (click)="log()">
+              <i class="bi bi-search"></i>
+            </button> -->
+    </div>
+  </div>
+
+  <!-- <br /> -->
+
+  <div
+    *ngIf="
+      placeBet == false &&
+      successMsg == false &&
+      !failureMsg &&
+      !isFetching &&
+      !isGameIdInvalid &&
+      !isGameOver
+    "
+    class="card-body table-responsive"
+  >
+    <table
+      matSort
+      (matSortChange)="sortData($event)"
+      class="table table-hover table-sm"
+    >
+      <thead>
+      <tr>
+        <!-- <th mat-sort-header="slNo" scope="col">#</th> -->
+        <th
+          mat-sort-header="gameId"
+          matTooltip="Game ID for respective game"
+          matTooltipPosition="above"
+          scope="col"
+        >
+          Game ID
+        </th>
+
+        <th
+          mat-sort-header="blackAmount"
+          matTooltip="Total MATIC on black side"
+          matTooltipPosition="above"
+          scope="col"
+          style="font-weight: normal;"
+        >
+          <b>♞Black Amount</b> 💰
+        </th>
+        <th
+          mat-sort-header="whiteBettor"
+          matTooltip="Total Bettors from both side"
+          matTooltipPosition="above"
+          scope="col"
+        >
+          Total Bettors
+        </th>
+        <th
+          mat-sort-header="whiteAmount"
+          matTooltip="Total MATIC on white side"
+          matTooltipPosition="above"
+          scope="col"
+          style="font-weight: normal;"
+        >
+          <b>♘White Amount</b> 💰
+        </th>
+        <th scope="col" class="th4">Action</th>
+      </tr>
+      </thead>
+
+      <tbody
+        *ngFor="
+          let item of sortedData | searchBar: searchText:list;
+          let i = index
+        "
+      >
+      <tr>
+        <!-- <th scope="row">{{ item.slNo }}</th> -->
+
+        <!-- For hover preview, but can't make it work for some security issue
+        <td>
+          <a id="game1" href="#" class="link-info" (click)="showGamePreview( item.gameId)">{{ item.gameId }}</a>
+          <iframe id="frame1" [src]="trustedGamelink"
+          width=600 height=397 frameborder=0></iframe>
+        </td> -->
+
+        <td matTooltip="Click to preview match" matTooltipPosition="left">
+          <a
+
+            class="link-info"
+            (click)="showGamePreview(item.gameId)"
+          >{{ item.gameId }}</a
+          >
+        </td>
+
+        <td class="tdC">{{ item.blackAmount }}</td>
+        <td class="tdC">{{ item.totalBettor }}</td>
+        <td class="tdC">{{ item.whiteAmount }}</td>
+        <td class="tdC">
+          <button
+            type="button"
+            class="btn btn-warning btn-sm"
+            style="min-width: 90px;"
+            (click)="betHere(item.gameId)"
+          >
+            Bet Here🤑
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    *ngIf="
+      placeBet == false &&
+      successMsg == false &&
+      !failureMsg &&
+      !isFetching &&
+      !isGameIdInvalid &&
+      !isGameOver
+    "
+    class="card-foot"
+  >
+    <mat-paginator
+      class="card-foot"
+      (page)="onPageChange($event)"
+      [length]="numbersOfRow"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 15]"
+      showFirstLastButtons
+    >
+    </mat-paginator>
+  </div>
+
+  <div *ngIf="isFetching" class="card-body">
+    <div
+      class="spinner-grow text-warning"
+      style="margin-top: 21vh; margin-left: 18vw; width: 8rem; height: 8rem"
+      role="status"
+    >
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="placeBet" class="card-body">
+    <form
+      (ngSubmit)="placeMyBet()"
+      class="row row-cols-lg-auto g-3 align-items-center"
+      #f="ngForm"
+    >
+      <!-- <div *ngIf="placeBet == true" class="card-body"> -->
+
+      <div class="row row-cols-lg-auto g-3 align-items-center placeBetBox">
+        <div class="col-12">
+          <input
+            type="text"
+            name="gameId"
+            ngModel
+            class="form-control"
+            id="inlineFormInputGroupUsername"
+            [placeholder]="selectedGame"
+            disabled
+          />
+        </div>
+        <div class="col-12">
+          <!-- <label for="inlineFormSelectPref"
+            >Select The Side(Black or White)</label
+          > -->
+          <select
+            class="form-control"
+            id="inlineFormSelectPref"
+            name="side"
+            [(ngModel)]="defaultSideValue"
+            #side="ngModel"
+            required
+          >
+            <option [ngValue]="null" disabled selected>
+              Select The Side(Black or White)
+            </option>
+            <option value="1">Black</option>
+            <option value="2">White</option>
+          </select>
+          <mat-error *ngIf="!side.valid && side.touched" style="color: red"
+          >Please choose a side
+          </mat-error
+          >
+        </div>
+        <div class="col-12">
+          <input
+            type="number"
+            class="form-control"
+            id="inlineFormInputGroupUsername"
+            placeholder="Amount In MATIC"
+            ngModel
+            name="amount"
+            #amount="ngModel"
+            required
+            pattern="^(?!(0))\d{1,16}$"
+          />
+          <mat-error *ngIf="!amount.valid && amount.touched" style="color: red"
+          >Please enter a valid amount
+          </mat-error
+          >
+        </div>
+        <div class="col-12">
+          <button
+            type="button"
+            class="btn btn-outline-danger bet-btn-cancel"
+            (click)="cancel()"
+            [disabled]="disablePlaceBet"
+          >
+            Cancel❌
+          </button>
+          <button
+            *ngIf="!disablePlaceBet"
+            type="submit"
+            class="btn btn-dark bet-btn-placeMyBet"
+            (click)="placeMyBet()"
+            [disabled]="!f.valid"
+          >
+            Place My Bet💰
+          </button>
+          <button
+            *ngIf="disablePlaceBet"
+            class="btn btn-dark bet-btn-placeMyBet"
+            type="button"
+            disabled
+          >
+            <span
+              class="spinner-grow spinner-grow-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Placing Bet💫
+          </button>
+        </div>
+      </div>
+      <!-- </div> -->
+    </form>
+  </div>
+
+  <div *ngIf="successMsg == true" class="card-body">
+    <div class="betSuccess">
+      <h3 class="font-weight-bold" style="font-style: italic">
+        Bet Placed Successfully!!!
+      </h3>
+      <h3>🙌😎🎉🎉</h3>
+      <br/>
+      <button type="button" class="btn btn-dark" (click)="placeAnotherBet()">
+        Place Another Bet🤑
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="failureMsg == true" class="card-body">
+    <div class="betSuccess">
+      <h3 class="font-weight-bold" style="font-style: italic">Bet Failed!!!</h3>
+      <p>
+        Transaction Cancelled <br/>OR <br/>
+        Transaction has been reverted by the EVM
+      </p>
+      <h3>💔😌😭💔</h3>
+      <br/>
+      <button type="button" class="btn btn-dark" (click)="tryAgain()">
+        🥺Please Try Again🙏
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isGameOver == true" class="card-body">
+    <div class="betSuccess">
+      <h3 class="font-weight-bold" style="font-style: italic">
+        OOPs You Missed !!!
+      </h3>
+      <p>
+        This game is over <br/>
+        Please place a bet for live match
+      </p>
+      <h3>💔😌😭💔</h3>
+      <br/>
+      <button type="button" class="btn btn-dark" (click)="tryAgain()">
+        🥺Please Try Again🙏
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isGameIdInvalid == true" class="card-body">
+    <div class="betSuccess">
+      <h3 class="font-weight-bold" style="font-style: italic">
+        Oops <span style="font-style: normal">¯\_(ツ)_/¯</span>
+      </h3>
+      <p>
+        Someone created game with invalid game ID<br/>
+        Please ignore this game and try with some other game
+      </p>
+      <h3>💔🤯😕💔</h3>
+      <br/>
+      <button type="button" class="btn btn-dark" (click)="tryAgain()">
+        🥺Please Try Again🙏
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="liveGamePreview"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Game Preview🧐</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <h5>For watching live match please click on open 👇</h5>
+        <iframe
+          [src]="trustedGamelink"
+          width="80%"
+          height="400rem"
+          frameborder="0"
+        ></iframe>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-danger bet-btn-cancel"
+          data-bs-dismiss="modal"
+        >
+          Close❌
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

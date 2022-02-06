@@ -1,0 +1,64 @@
+.faq {
+  // background-size: 100%  ;
+  // background-size: cover;
+  height: 100vh;
+  // padding-top: 10px;
+  // background-color:#eca424;
+}
+
+.pageContent {
+  width: 92vw;
+  height: 70vh;
+  margin-left: 3vw;
+  position: absolute;
+  // background-color:whitesmoke;
+  background-color: #eca424;
+  box-shadow: 8px 10px 8px -6px rgba(0, 0, 0, 0.5);
+  // border-bottom-left-radius: 40px;
+  // border-top-left-radius: 40px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  text-align: center;
+  padding: 60px 30px 30px 30px;
+
+  // height: px;
+}
+
+.pageHeadingContent {
+  width: 23vw;
+  height: 18vh;
+  margin-top: -12vh;
+  margin-left: 5vw;
+  position: absolute;
+  background-color: var(--card-color);
+  box-shadow: 8px 10px 8px -6px rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+  text-align: center;
+  padding: 1.3rem 1rem 0.6rem;
+
+  // height: px;
+}
+
+.size-img-question {
+  width: 20%;
+  height: 20%;
+}
+
+.list {
+  color: black;
+}
+
+#accordionFlushExample {
+  // color: #f3ecec;
+  text-align: left;
+}
+
+.accordion-button {
+  padding: 0.7rem 0.9rem;
+  background-color: #f8f4f4;
+}

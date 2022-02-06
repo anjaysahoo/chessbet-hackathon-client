@@ -1,0 +1,197 @@
+<div class="claim">
+
+  <div [ngClass]="{'blur': blurred}">
+    <div class="claimTile">
+      <div>
+        <h6>WIN</h6>
+        <animated-digit [digit]="win" [duration]="1000"></animated-digit>
+      </div>
+      <div>
+        <h6>Draw</h6>
+        <animated-digit [digit]="draw" [duration]="1000"></animated-digit>
+      </div>
+      <div>
+        <h6>LOSS</h6>
+        <animated-digit [digit]=loss [duration]="1000"></animated-digit>
+      </div>
+      <div></div>
+      <div>
+        <h6>Claim Amount</h6>
+        <animated-digit [digit]="claimAmount" [duration]="1000"></animated-digit>
+      </div>
+      <div></div>
+
+      <button *ngIf="!isClaiming" class="btn btn-dark btn-lg " (click)="callClaimRewards()"
+              [disabled]="claimAmount==='0'"><h4>💸Claim Now💲🤑</h4></button>
+      <button *ngIf="isClaiming" class="btn btn-dark btn-lg " type="button" disabled>
+
+        <h3>🤑Claiming..🚀&nbsp;<span class="spinner-grow spinner-grow-md" role="status" aria-hidden="true"></span></h3>
+      </button>
+    </div>
+
+    <div class="card text-dark mb-3 tile ">
+      <div class="card-header bg-dark text-light">
+        <h5 class="liveHead">Stats🎯</h5>
+        <button class="btn btn-warning btn-sm refresh-btn" matTooltip="Refresh to load latest stats"
+                matTooltipPosition="above" (click)="refreshStats()" [disabled]="isFetching">Refresh
+        </button>
+        <div class="input-group form-inline">
+          <!-- <form class="form-inline "> -->
+          <input class="form-control form-inline" [(ngModel)]="searchText" type="text" placeholder="Search"
+                 aria-label="Search">
+          <!-- </form> -->
+          <!-- <button type="button" class="btn btn-warning searchButton" (click)="log()">
+            <i class="bi bi-search"></i>
+          </button> -->
+        </div>
+      </div>
+
+
+      <!-- <br> -->
+      <div class="card-body table-responsive" *ngIf="!isFetching">
+        <table matSort (matSortChange)="sortData($event)" class="table table-hover table-sm">
+          <thead>
+          <tr>
+            <!-- <th mat-sort-header="slNo" scope="col">#</th> -->
+            <th mat-sort-header="gameId" matTooltip="Game ID for respective game" matTooltipPosition="above"
+                scope="col">Game ID
+            </th>
+            <th mat-sort-header="amountBetted" matTooltip="Amount betted for respective game" matTooltipPosition="above"
+                scope="col" style="font-weight: normal;"><b>Amount Betted&nbsp;</b> 💸
+            </th>
+            <th mat-sort-header="gameResult" matTooltip="Game result for respective game" matTooltipPosition="above"
+                scope="col" style="font-weight: normal;"><b>Game Result&nbsp;</b> 🧾
+            </th>
+            <th mat-sort-header="yourResult" matTooltip="Your result for respective game" matTooltipPosition="above"
+                scope="col" style="font-weight: normal;"><b>Your Result &nbsp; </b> <span
+              style="font-size:larger;">⚖</span></th>
+            <th mat-sort-header="status" matTooltip="Claim & Transaction status for respective game"
+                matTooltipPosition="above" scope="col" style="font-weight: normal;"><b> Status&nbsp;</b>⏳
+            </th>
+          </tr>
+          </thead>
+
+          <tbody *ngFor="let item of sortedData |  searchBar: searchText:list;let i=index">
+          <tr>
+            <!-- <th scope="row">{{item.slNo}}</th> -->
+            <td matTooltip="Click to preview match" matTooltipPosition="left"><a  class="link-info"
+                                                                                 (click)="showGamePreview(item.gameId)">{{item.gameId}}</a>
+            </td>
+            <td>{{item.amountBetted}}</td>
+            <td>{{item.gameResult}}</td>
+            <td>{{item.yourResult}}</td>
+            <td>{{item.status}}</td>
+          </tr>
+
+          </tbody>
+
+
+        </table>
+      </div>
+      <div class="card-foot" *ngIf="!isFetching">
+        <mat-paginator
+          class="card-foot"
+          (page)="onPageChange($event)"
+          [length]="numbersOfRow"
+          [pageSize]="10"
+          [pageSizeOptions]="[5,10,15]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+
+      <div *ngIf="isFetching" class="card-body">
+        <div
+          class="spinner-grow text-warning"
+          style="margin-top: 18vh; margin-left: 28vw; width: 10rem; height: 10rem"
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+  <div *ngIf="activeUserAccount==null" class="popUp">
+    <h5 class="font-weight-bold" style="font-style: italic;">Connect Your Wallet To <b>Claim</b>,</h5>
+    <h5 class="font-weight-bold" style="font-style: italic;">See Win/Loss History & Other Stats</h5>
+    <h3>✨💲😎🥺💹📐✨</h3>
+    <br>
+    <button type="button" class="btn btn-dark " data-bs-toggle="modal" data-bs-target="#exampleModal"
+            (click)="showClaimMenu()">Connect Wallet🔐
+    </button>
+  </div>
+</div>
+
+
+<div class=" modal fade" id="successfullClaim" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Claim Status⏳</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <!-- <h3>🎉 You Have Successfully🎉
+          <br>
+           🙌 Claimed Your Reward💰 !!!🥳
+          </h3> -->
+        <h3 class="font-weight-bold" style="font-style: italic">
+          Claim Successfull !!!
+        </h3>
+        <p>You Have Successfully Claimed Your Reward🙌</p>
+        <h3>🎉🥳🥂🎉</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger bet-btn-cancel" data-bs-dismiss="modal">Close❌</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class=" modal fade" id="failureClaim" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Claim Status⏳</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <h3 class="font-weight-bold" style="font-style: italic">
+          Claim Failed !!!
+        </h3>
+        <p>Transaction Cancelled <br>OR <br> Transaction has been reverted by the EVM</p>
+        <h3>💔😌😭💔</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger bet-btn-cancel" data-bs-dismiss="modal">🥺Please Try
+          Again🙏
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class=" modal fade" id="userGamePreview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Game Preview🧐</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <h5>For watching complete match analysis please click on OPEN 👇</h5>
+        <iframe [src]="trustedGamelink"
+                width=80% height=400rem frameborder=0></iframe>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger bet-btn-cancel" data-bs-dismiss="modal">Close❌</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

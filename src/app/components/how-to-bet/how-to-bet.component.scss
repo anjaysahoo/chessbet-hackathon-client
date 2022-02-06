@@ -1,0 +1,107 @@
+.howToBet {
+  height: 100vh;
+}
+
+.pageContent {
+  // width: 400px;
+  // margin-top: 340px;
+  // margin-left: 120px;
+  width: 94%;
+  height: 72%;
+  margin-top: 9%;
+  margin-left: 2%;
+  position: absolute;
+  // background-color:whitesmoke;
+  background-color: #eca424;
+  box-shadow: 8px 10px 8px -6px rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 40px;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+  text-align: center;
+  padding: 15px;
+
+
+  // height: px;
+}
+
+
+.pageHeadingContent {
+  // width: 400px;
+  // margin-top: 340px;
+  // margin-left: 120px;
+  width: 18%;
+  height: 71%;
+  margin-top: 3%;
+  margin-left: 4%;
+  position: absolute;
+  background-color: var(--card-color);
+  box-shadow: 8px 10px 8px -6px rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 40px;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+  text-align: center;
+  padding: 15px;
+
+
+  // height: px;
+}
+
+.size-img {
+  width: 80%;
+  height: 60%;
+  box-shadow: 8px 10px 8px -6px rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 40px;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+.size-img-live_match {
+  width: 60%;
+  height: 40%;
+  box-shadow: 8px 10px 8px -6px rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 40px;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+.size-img-horse {
+  width: 80%;
+  height: 60%;
+
+}
+
+
+.stepper {
+  padding: 15px 15px 0 15px;
+  margin-left: 20%;
+  background-color: #eca424;
+  height: inherit;
+}
+
+.link-info {
+  text-decoration: none;
+  text-align: center;
+  // color: #45afaf;
+  color: #0a49d6;
+  font-weight: 500;
+  font-size: large;
+}
+
+.step-size {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.highlight {
+  font-size: medium;
+
+}
+
+.step-content {
+  font-size: large;
+}
+

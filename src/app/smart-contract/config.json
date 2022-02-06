@@ -1,0 +1,1094 @@
+{
+  "testnetContractAddress": "0x575c18eD0CdC607FccD6FB49Ba726cCA18e33a2C",
+  "contractABI": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "_gameId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_voter",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "gameCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "_gameId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "winner",
+          "type": "uint8"
+        }
+      ],
+      "name": "gameEnded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_benificiary",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "rewardWithdraw",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "_gameId",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_voter",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "_side",
+          "type": "uint8"
+        }
+      ],
+      "name": "votePlaced",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "calculateRewards",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "claimableReward",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "fees",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "removableGames",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "int8[]",
+          "name": "results",
+          "type": "int8[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "claimRewards",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_gameIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_gameId",
+          "type": "string"
+        },
+        {
+          "internalType": "uint8",
+          "name": "_winner",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_gameEndTimestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "endGame",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "feePercent",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_gameId",
+          "type": "string"
+        }
+      ],
+      "name": "gameExists",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "geUnlockTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getActiveGames",
+      "outputs": [
+        {
+          "internalType": "string[]",
+          "name": "",
+          "type": "string[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAllGamesCreatedTillDate",
+      "outputs": [
+        {
+          "internalType": "string[]",
+          "name": "",
+          "type": "string[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string[]",
+          "name": "gameIdList",
+          "type": "string[]"
+        }
+      ],
+      "name": "getBulkGameDetails",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "gameId",
+              "type": "string"
+            },
+            {
+              "internalType": "uint8",
+              "name": "winner",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "gameEndTimestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "isOn",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountWhite",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountBlack",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "numberBets",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "whiteBets",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "blackBets",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "validTotalAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "validAmountWhite",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "validAmountBlack",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ChessBettor.ReturnableGameData[]",
+          "name": "returnList",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_gameId",
+          "type": "string"
+        }
+      ],
+      "name": "getGameDetails",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "gameId",
+              "type": "string"
+            },
+            {
+              "internalType": "uint8",
+              "name": "winner",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "gameEndTimestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "isOn",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountWhite",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountBlack",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "numberBets",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "whiteBets",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "blackBets",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "validTotalAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "validAmountWhite",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "validAmountBlack",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ChessBettor.ReturnableGameData",
+          "name": "",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "player",
+              "type": "address"
+            },
+            {
+              "internalType": "uint8",
+              "name": "voteFor",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "voteTimestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "claimed",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct ChessBettor.Vote[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "getGamesPlayedByPlayer",
+      "outputs": [
+        {
+          "internalType": "string[]",
+          "name": "",
+          "type": "string[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "getLengthOfAllGameList",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "getLengthOfUnclaimedGameList",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "modifyWinsAndLosses",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "maxIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPlayerStatsForAllGames",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "totalGames",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "wins",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "draws",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "losses",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "undetermined",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "claimableRewardAmount",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "components": [
+                    {
+                      "internalType": "string",
+                      "name": "gameId",
+                      "type": "string"
+                    },
+                    {
+                      "internalType": "uint8",
+                      "name": "winner",
+                      "type": "uint8"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "gameEndTimestamp",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "bool",
+                      "name": "isOn",
+                      "type": "bool"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "totalAmount",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "amountWhite",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "amountBlack",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "numberBets",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "whiteBets",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "blackBets",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "validTotalAmount",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "validAmountWhite",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "validAmountBlack",
+                      "type": "uint256"
+                    }
+                  ],
+                  "internalType": "struct ChessBettor.ReturnableGameData",
+                  "name": "gameData",
+                  "type": "tuple"
+                },
+                {
+                  "components": [
+                    {
+                      "internalType": "address",
+                      "name": "player",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "uint8",
+                      "name": "voteFor",
+                      "type": "uint8"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "amount",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "voteTimestamp",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "bool",
+                      "name": "claimed",
+                      "type": "bool"
+                    }
+                  ],
+                  "internalType": "struct ChessBettor.Vote",
+                  "name": "voteData",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "int8",
+                  "name": "result",
+                  "type": "int8"
+                }
+              ],
+              "internalType": "struct ChessBettor.ReturnableGameSpecificUserData[]",
+              "name": "allGameData",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct ChessBettor.ReturnableUserData",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "modifyWinsAndLosses",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "maxIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPlayerStatsForUnclaimedGames",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "totalGames",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "wins",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "draws",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "losses",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "undetermined",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "claimableRewardAmount",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "components": [
+                    {
+                      "internalType": "string",
+                      "name": "gameId",
+                      "type": "string"
+                    },
+                    {
+                      "internalType": "uint8",
+                      "name": "winner",
+                      "type": "uint8"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "gameEndTimestamp",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "bool",
+                      "name": "isOn",
+                      "type": "bool"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "totalAmount",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "amountWhite",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "amountBlack",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "numberBets",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "whiteBets",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "blackBets",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "validTotalAmount",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "validAmountWhite",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "validAmountBlack",
+                      "type": "uint256"
+                    }
+                  ],
+                  "internalType": "struct ChessBettor.ReturnableGameData",
+                  "name": "gameData",
+                  "type": "tuple"
+                },
+                {
+                  "components": [
+                    {
+                      "internalType": "address",
+                      "name": "player",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "uint8",
+                      "name": "voteFor",
+                      "type": "uint8"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "amount",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "voteTimestamp",
+                      "type": "uint256"
+                    },
+                    {
+                      "internalType": "bool",
+                      "name": "claimed",
+                      "type": "bool"
+                    }
+                  ],
+                  "internalType": "struct ChessBettor.Vote",
+                  "name": "voteData",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "int8",
+                  "name": "result",
+                  "type": "int8"
+                }
+              ],
+              "internalType": "struct ChessBettor.ReturnableGameSpecificUserData[]",
+              "name": "allGameData",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct ChessBettor.ReturnableUserData",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "lock",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "maxAllowedUnclaimedGames",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "maxBettorsPerGame",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "minBetAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_gameId",
+          "type": "string"
+        },
+        {
+          "internalType": "uint8",
+          "name": "_vote",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "placeBet",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "remainingFeeBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_feePercent",
+          "type": "uint256"
+        }
+      ],
+      "name": "setFeePercent",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMaxAllowedUnclaimedGames",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "noOfBettors",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMaxBettorsPerGame",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMinBetAmount",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalFeeGenerated",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "unlock",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address payable",
+          "name": "to",
+          "type": "address"
+        }
+      ],
+      "name": "withdrawFees",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}
